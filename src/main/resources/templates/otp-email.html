@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code de vérification – Les Jardins Suspendus</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: #f0f4f8; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+    /* Conteneur principal */
+    .wrapper { max-width: 600px; margin: 40px auto; }
+
+    /* Header vert dégradé */
+    .header {
+      background: linear-gradient(135deg, #2d6a4f 0%, #52b788 100%);
+      border-radius: 16px 16px 0 0;
+      padding: 48px 40px 40px;
+      text-align: center;
+    }
+    .header .logo-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+    .header h1 {
+      color: #fff;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .header p { color: #d8f3dc; font-size: 14px; margin-top: 6px; }
+
+    /* Corps */
+    .body {
+      background: #ffffff;
+      padding: 40px 40px 32px;
+    }
+    .body h2 { color: #1b4332; font-size: 20px; margin-bottom: 16px; }
+    .body p  { color: #4a5568; font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+
+    /* Bloc code OTP */
+    .otp-wrapper {
+      margin: 28px 0;
+      text-align: center;
+    }
+    .otp-box {
+      display: inline-block;
+      background: #f0fdf4;
+      border: 2px dashed #52b788;
+      border-radius: 12px;
+      padding: 22px 48px;
+    }
+    .otp-label { font-size: 13px; color: #74c69d; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+    .otp-code  {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: 12px;
+      color: #2d6a4f;
+      margin-top: 6px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Alerte expiration */
+    .alert {
+      background: #fff8e1;
+      border-left: 4px solid #f59e0b;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #92400e;
+    }
+    .alert strong { display: block; margin-bottom: 4px; }
+
+    /* Footer */
+    .footer {
+      background: #f7f9fc;
+      border-radius: 0 0 16px 16px;
+      padding: 24px 40px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    .footer p { font-size: 13px; color: #a0aec0; line-height: 1.6; }
+    .footer a { color: #52b788; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="logo-icon">🌿</span>
+    <h1 th:text="${appName}">Les Jardins Suspendus</h1>
+    <p>Votre maison d'hôtes au cœur de la nature</p>
+  </div>
+
+  <!-- Corps -->
+  <div class="body">
+    <h2>Vérifiez votre adresse email</h2>
+    <p>
+      Merci de vous être inscrit ! Pour activer votre compte, veuillez saisir
+      le code de vérification ci-dessous dans l'application :
+    </p>
+
+    <!-- Code OTP -->
+    <div class="otp-wrapper">
+      <div class="otp-box">
+        <div class="otp-label">Votre code</div>
+        <div class="otp-code" th:text="${otpCode}">000000</div>
+      </div>
+    </div>
+
+    <!-- Alerte -->
+    <div class="alert">
+      <strong>⏱️ Ce code expire dans 5 minutes.</strong>
+      Il est à usage unique. Ne le partagez jamais avec quiconque.
+    </div>
+
+    <p>
+      Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer
+      ce message en toute sécurité.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>
+      © 2026 <a th:text="${appName}">Les Jardins Suspendus</a> · Tous droits réservés<br/>
+      Cet email a été envoyé automatiquement — merci de ne pas y répondre.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

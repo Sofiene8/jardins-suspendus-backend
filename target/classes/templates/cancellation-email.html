@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Annulation de réservation – Les Jardins Suspendus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f0f4f8; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .wrapper { max-width: 600px; margin: 40px auto; }
+
+    /* Header orange/rouge */
+    .header {
+      background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 60%, #f87171 100%);
+      border-radius: 16px 16px 0 0;
+      padding: 44px 40px 36px;
+      text-align: center;
+    }
+    .header .icon-circle {
+      width: 68px; height: 68px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      line-height: 68px;
+      font-size: 34px;
+      margin: 0 auto 16px;
+      display: block;
+    }
+    .header h1 { color: #fff; font-size: 22px; font-weight: 700; }
+    .header .subtitle { color: #fecaca; font-size: 14px; margin-top: 6px; }
+
+    /* Corps */
+    .body { background: #fff; padding: 36px 40px; }
+    .greeting { font-size: 16px; color: #2d3748; margin-bottom: 20px; line-height: 1.6; }
+    .greeting strong { color: #7f1d1d; }
+
+    /* Encadré récap */
+    .recap-box {
+      background: #fff5f5;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .recap-header {
+      background: #fee2e2;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #7f1d1d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .recap-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 20px;
+      border-bottom: 1px solid #fef2f2;
+      font-size: 14px;
+    }
+    .recap-row:last-child { border-bottom: none; }
+    .recap-label { color: #718096; font-weight: 500; }
+    .recap-value { color: #2d3748; font-weight: 600; }
+    .badge-cancel {
+      display: inline-block;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    /* Infos remboursement */
+    .refund-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 24px 0;
+      font-size: 14px;
+      color: #166534;
+    }
+    .refund-box .refund-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+
+    /* CTA */
+    .cta-box { text-align: center; margin: 28px 0; }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #2d6a4f, #52b788);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1b4332;
+      border-radius: 0 0 16px 16px;
+      padding: 28px 40px;
+      text-align: center;
+    }
+    .footer .brand { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .footer .contact { color: #74c69d; font-size: 13px; line-height: 1.8; }
+    .footer .contact a { color: #95d5b2; text-decoration: none; }
+    .footer .legal { color: #52b788; font-size: 12px; margin-top: 14px; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="icon-circle">✕</span>
+    <h1>Réservation Annulée</h1>
+    <p class="subtitle" th:text="${appName}">Les Jardins Suspendus</p>
+  </div>
+
+  <!-- Corps -->
+  <div class="body">
+
+    <p class="greeting">
+      Bonjour <strong th:text="${customerName}">Client</strong>,<br/>
+      Nous vous confirmons l'annulation de votre réservation. Nous espérons vous revoir
+      très bientôt pour un prochain séjour.
+    </p>
+
+    <!-- Récapitulatif -->
+    <div class="recap-box">
+      <div class="recap-header">📋 Réservation annulée</div>
+
+      <div class="recap-row">
+        <span class="recap-label">N° de réservation</span>
+        <span class="recap-value">#<span th:text="${reservationId}">0000</span></span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Chambre</span>
+        <span class="recap-value" th:text="${roomTitle}">Suite Jasmin</span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Dates prévues</span>
+        <span class="recap-value">
+          <span th:text="${startDate}">01/01/2026</span>
+          &nbsp;→&nbsp;
+          <span th:text="${endDate}">05/01/2026</span>
+        </span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Statut</span>
+        <span class="recap-value"><span class="badge-cancel">✕ ANNULÉE</span></span>
+      </div>
+    </div>
+
+    <!-- Infos remboursement -->
+    <div class="refund-box">
+      <div class="refund-title">💰 Remboursement</div>
+      <p>
+        Si un paiement a été effectué, le remboursement sera traité sous
+        <strong>5 à 7 jours ouvrables</strong> selon votre banque.
+        Pour toute question, contactez notre équipe.
+      </p>
+    </div>
+
+    <!-- CTA réservation future -->
+    <div class="cta-box">
+      <a class="cta-btn" href="#">
+        🌿 Faire une nouvelle réservation
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="brand">🌿 Les Jardins Suspendus</div>
+    <div class="contact">
+      📧 <a href="mailto:contact@jardinssuspendus.com">contact@jardinssuspendus.com</a><br/>
+      📞 +216 XX XXX XXX
+    </div>
+    <div class="legal">
+      © 2026 Les Jardins Suspendus · Cet email est automatique, merci de ne pas y répondre.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmation de réservation – Les Jardins Suspendus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f0f4f8; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .wrapper { max-width: 620px; margin: 40px auto; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1b4332 0%, #40916c 50%, #74c69d 100%);
+      border-radius: 16px 16px 0 0;
+      padding: 44px 40px 36px;
+      text-align: center;
+    }
+    .header .check-icon {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      line-height: 72px;
+      font-size: 36px;
+      margin: 0 auto 16px;
+      display: block;
+    }
+    .header h1 { color: #fff; font-size: 22px; font-weight: 700; }
+    .header .subtitle { color: #d8f3dc; font-size: 14px; margin-top: 6px; }
+
+    /* Section principale */
+    .body { background: #fff; padding: 36px 40px; }
+    .greeting { font-size: 16px; color: #2d3748; margin-bottom: 20px; }
+    .greeting strong { color: #1b4332; }
+
+    /* Encadré récapitulatif */
+    .recap-box {
+      background: #f8fffe;
+      border: 1px solid #b7e4c7;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .recap-header {
+      background: #d8f3dc;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #1b4332;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .recap-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 20px;
+      border-bottom: 1px solid #e9f5ee;
+      font-size: 14px;
+    }
+    .recap-row:last-child { border-bottom: none; }
+    .recap-label { color: #718096; font-weight: 500; }
+    .recap-value { color: #2d3748; font-weight: 600; text-align: right; }
+    .recap-value .badge {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    /* Total */
+    .total-row {
+      background: #1b4332;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .total-row .total-label { color: #d8f3dc; font-size: 15px; font-weight: 600; }
+    .total-row .total-amount { color: #ffffff; font-size: 22px; font-weight: 800; }
+
+    /* Infos pratiques */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .info-card {
+      background: #f7fafc;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .info-card .info-icon { font-size: 28px; display: block; margin-bottom: 8px; }
+    .info-card .info-label { font-size: 11px; color: #a0aec0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .info-card .info-value { font-size: 16px; font-weight: 700; color: #2d3748; margin-top: 4px; }
+
+    /* Message */
+    .message {
+      background: #fef9c3;
+      border-left: 4px solid #eab308;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #713f12;
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1b4332;
+      border-radius: 0 0 16px 16px;
+      padding: 28px 40px;
+      text-align: center;
+    }
+    .footer .brand { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .footer .contact { color: #74c69d; font-size: 13px; line-height: 1.8; }
+    .footer .contact a { color: #95d5b2; text-decoration: none; }
+    .footer .legal { color: #52b788; font-size: 12px; margin-top: 14px; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="check-icon">✓</span>
+    <h1>Réservation Confirmée !</h1>
+    <p class="subtitle" th:text="${appName}">Les Jardins Suspendus</p>
+  </div>
+
+  <!-- Corps -->
+  <div class="body">
+
+    <p class="greeting">
+      Bonjour <strong th:text="${customerName}">Client</strong>,<br/>
+      Votre paiement a bien été reçu et votre séjour est confirmé. 🎉
+    </p>
+
+    <!-- Récapitulatif de réservation -->
+    <div class="recap-box">
+      <div class="recap-header">📋 Récapitulatif de votre réservation</div>
+
+      <div class="recap-row">
+        <span class="recap-label">N° de réservation</span>
+        <span class="recap-value">#<span th:text="${reservationId}">0000</span></span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Chambre</span>
+        <span class="recap-value" th:text="${roomTitle}">Suite Jasmin</span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Arrivée</span>
+        <span class="recap-value" th:text="${startDate}">01/01/2026</span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Départ</span>
+        <span class="recap-value" th:text="${endDate}">05/01/2026</span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Durée</span>
+        <span class="recap-value"><span th:text="${nights}">4</span> nuit(s)</span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Adultes</span>
+        <span class="recap-value" th:text="${adults}">2</span>
+      </div>
+
+      <div class="recap-row" th:if="${children6To12 > 0}">
+        <span class="recap-label">Enfants (6–12 ans)</span>
+        <span class="recap-value" th:text="${children6To12}">1</span>
+      </div>
+
+      <div class="recap-row" th:if="${children0To5 > 0}">
+        <span class="recap-label">Enfants (0–5 ans)</span>
+        <span class="recap-value">
+          <span th:text="${children0To5}">1</span>
+          <span class="badge">Gratuit</span>
+        </span>
+      </div>
+
+      <div class="recap-row">
+        <span class="recap-label">Statut</span>
+        <span class="recap-value"><span class="badge">✓ VALIDÉE</span></span>
+      </div>
+
+      <!-- Total -->
+      <div class="total-row">
+        <span class="total-label">💳 Montant payé</span>
+        <span class="total-amount"><span th:text="${totalPrice}">0.00</span> DT</span>
+      </div>
+    </div>
+
+    <!-- Infos pratiques -->
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="info-icon">🔑</span>
+        <div class="info-label">Check-in</div>
+        <div class="info-value">À partir de 14h00</div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🚪</span>
+        <div class="info-label">Check-out</div>
+        <div class="info-value">Avant 12h00</div>
+      </div>
+    </div>
+
+    <div class="message">
+      📌 Pour toute modification ou demande spéciale, contactez-nous au moins
+      <strong>48h avant votre arrivée</strong>.
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="brand">🌿 Les Jardins Suspendus</div>
+    <div class="contact">
+      📧 <a href="mailto:contact@jardinssuspendus.com">contact@jardinssuspendus.com</a><br/>
+      📞 +216 XX XXX XXX
+    </div>
+    <div class="legal">
+      © 2026 Les Jardins Suspendus · Cet email est automatique, merci de ne pas y répondre.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
